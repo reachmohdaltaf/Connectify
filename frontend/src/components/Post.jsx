@@ -29,7 +29,7 @@ const Post = ({ post }) => {
       <CardContent className="mt-4">
         {post.content || ''}
         {post.image && (
-          <div className="h-40 w-full overflow-hidden rounded-lg sm:h-72">
+          <div className="h-full w-full overflow-hidden rounded-lg sm:h-72">
             <img
               src={post.image}
               alt="Post content"

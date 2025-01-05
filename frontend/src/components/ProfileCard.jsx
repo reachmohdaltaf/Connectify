@@ -6,7 +6,7 @@ const ProfileCard = ({ authUser }) => {
   const { name, username, email, location, profilePicture, connections } = authUser;
   
   return (
-    <Card className="w-72 hidden lg:block h-fit bg-white rounded-lg shadow-sm p-4">
+    <Card className="w-[40%] hidden lg:block h-fit bg-white rounded-lg shadow-sm p-4">
       <CardHeader className="flex items-center">
         <img 
           src={profilePicture || "https://via.placeholder.com/150"} 

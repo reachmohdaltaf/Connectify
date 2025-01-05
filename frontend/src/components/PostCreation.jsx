@@ -73,7 +73,7 @@ const PostCreationCard = ({ authUser }) => {
     return (
         <Card className="flex flex-col max-h-screen  bg-white rounded-sm shadow-none p-4 gap-8 items-center">
             {/* Profile Image */}
-            <div className="flex flex-col md:flex-row w-full  items-center md:items-start space-y-4 md:space-y-0 md:space-x-4">
+            <div className="flex flex-col md:flex-row w-full   items-center md:items-start space-y-4 md:space-y-0 md:space-x-4">
                 <img
                     src={authUser.ProfilePicture || "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"}
                     className="rounded-full w-10 h-10"

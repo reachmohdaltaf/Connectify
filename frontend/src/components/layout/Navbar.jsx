@@ -46,6 +46,7 @@ const Navbar = () => {
         mutationFn: async () => axiosInstance.post('/auth/logout'),
         onSuccess: () => {
             queryClient.invalidateQueries(["authUser"])
+            
         }
         
     })
