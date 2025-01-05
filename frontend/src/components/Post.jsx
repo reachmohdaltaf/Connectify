@@ -8,7 +8,7 @@ const Post = ({ post }) => {
   });
 
   return (
-    <Card className="rounded-none h-fit p-4 shadow-none">
+    <Card className="rounded-sm h-fit p-4 shadow-none">
       <CardTitle className="flex items-center justify-start gap-3">
         <img
           src={
@@ -29,13 +29,14 @@ const Post = ({ post }) => {
       <CardContent className='mt-4 bg-gray-50'>
         {post.content || ""}
         {post.image && (
-          <div className="mt-4">
-            <img
-              src={post.image}
-              alt="Post content"
-              className="w-full rounded-lg"
-            />
-          </div>
+         <div className=" h-72 w-full overflow-hidden rounded-lg">
+         <img
+           src={post.image}
+           alt="Post content"
+           className="w-full mt-4  h-full object-contain"
+         />
+       </div>
+       
         )}
       </CardContent>
     </Card>

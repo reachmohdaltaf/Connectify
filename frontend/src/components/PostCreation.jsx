@@ -71,7 +71,7 @@ const PostCreationCard = ({ authUser }) => {
     };
 
     return (
-        <Card className="flex-col max-h-fit bg-white rounded-none shadow-none p-4 gap-8 flex items-center space-x-4">
+        <Card className="flex-col max-h-fit bg-white rounded-sm shadow-none p-4 gap-8 flex items-center space-x-4">
             {/* Profile Image */}
             <div className="flex w-[500px] items-center space-x-4">
                 <img
