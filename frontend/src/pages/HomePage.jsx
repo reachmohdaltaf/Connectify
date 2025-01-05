@@ -1,5 +1,8 @@
+import Post from '@/components/Post'
 import PostCreation from '@/components/PostCreation'
 import ProfileCard from '@/components/ProfileCard'
+import RecommendedUser from '@/components/RecommendedUser'
+import { Card } from '@/components/ui/card'
 import { axiosInstance } from '@/lib/axios'
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
@@ -35,7 +38,24 @@ const HomePage = () => {
     <div className='flex'>
 
     <ProfileCard authUser={authUser}/>
+    <div>
     <PostCreation authUser={authUser}/>
+    {posts?.map((post) =>{
+      return <Post key={post._id} post={post} />
+    })}
+    {posts?.length === 0 && <div className='text-center text-2xl'>No posts to show</div>}
+    </div>
+
+    {recommendedUsers?.length > 0 && (
+				<Card className="h-fit">
+            	{recommendedUsers?.map((user) => (
+							<RecommendedUser key={user._id} user={user} />
+						))}
+        </Card>
+					
+				
+			)}
+
 
 
     </div>

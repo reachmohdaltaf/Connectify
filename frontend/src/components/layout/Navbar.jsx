@@ -50,8 +50,8 @@ const Navbar = () => {
         
     })
 
-    console.log("Notification", notifications)
-    console.log("Connection Requests", connectionRequests)
+    // console.log("Notification", notifications)
+    // console.log("Connection Requests", connectionRequests)
 
 
   return (
