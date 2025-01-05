@@ -55,8 +55,8 @@ const Navbar = () => {
 
 
   return (
-    <div className="mx-auto max-w-screen-2xl p-4">
-      <nav className="  flex items-center  justify-between">
+    <div className="mx-auto bg-white sticky top-0 z-10 max-w-screen-2xl border p-2 px-4">
+      <nav className="  flex  items-center  justify-between">
         <div className="logo flex  items-center gap-2">
           <img src={logo} className="h-8"  alt="" />
           <h3 className="text-xl font-semibold">Connectify</h3>

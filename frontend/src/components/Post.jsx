@@ -8,12 +8,12 @@ const Post = ({ post }) => {
   });
 
   return (
-    <Card className="rounded-sm h-fit p-4 shadow-none">
+    <Card className="rounded-sm w-full  h-fit p-4 shadow-none ">
       <CardTitle className="flex items-center justify-start gap-3">
         <img
           src={
             post.author.profilePicture ||
-            "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+            'https://cdn-icons-png.flaticon.com/512/149/149071.png'
           }
           className="w-10 h-10 rounded-full"
           alt={`${post.author.name}'s profile`}
@@ -26,17 +26,16 @@ const Post = ({ post }) => {
           )}
         </div>
       </CardTitle>
-      <CardContent className='mt-4 bg-gray-50'>
-        {post.content || ""}
+      <CardContent className="mt-4">
+        {post.content || ''}
         {post.image && (
-         <div className=" h-72 w-full overflow-hidden rounded-lg">
-         <img
-           src={post.image}
-           alt="Post content"
-           className="w-full mt-4  h-full object-contain"
-         />
-       </div>
-       
+          <div className="h-40 w-full overflow-hidden rounded-lg sm:h-72">
+            <img
+              src={post.image}
+              alt="Post content"
+              className="w-full h-full mt-4 object-cover"
+            />
+          </div>
         )}
       </CardContent>
     </Card>

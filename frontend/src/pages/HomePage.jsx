@@ -1,5 +1,6 @@
 import Post from "@/components/Post";
 import PostCreation from "@/components/PostCreation";
+import PremiumProfileCard from "@/components/PremiumProfileCard";
 import ProfileCard from "@/components/ProfileCard";
 import RecommendedUser from "@/components/RecommendedUser";
 import { Card } from "@/components/ui/card";
@@ -35,7 +36,7 @@ const HomePage = () => {
   return (
     <div className="flex justify-center gap-4">
       <ProfileCard authUser={authUser} />
-      <div>
+      <div className="w-full">
         <PostCreation authUser={authUser} />
         {posts?.map((post) => {
           return <Post key={post._id} post={post} />;
@@ -44,13 +45,16 @@ const HomePage = () => {
           <div className="text-center text-2xl">No posts to show</div>
         )}
       </div>
-      {recommendedUsers?.length > 0 && (
-        <Card className="w-72 shadow-none p-4  rounded-sm h-full flex flex-col items-center justify-center gap-2">
+     <div className="lg:flex hidden flex-col  sm:hidden relative gap-2">
+     {recommendedUsers?.length > 0 && (
+        <Card className="w-80 shadow-none  p-4  rounded-sm h-fit flex flex-col items-center justify-center gap-2">
           {recommendedUsers?.map((user) => (
             <RecommendedUser key={user._id} user={user} />
           ))}
         </Card>
       )}
+      <PremiumProfileCard authUser={authUser}/>
+     </div>
     </div>
   );
 };

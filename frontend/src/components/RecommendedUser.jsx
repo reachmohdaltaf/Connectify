@@ -4,13 +4,13 @@ import { Button } from "./ui/button";
 
 const RecommendedUser = ({ user }) => {
   return (
-    <Card className="w-full p-3">
+    <Card className="w-full  p-4 ">
       <CardTitle className="w-full flex items-center justify-between">
         <div className="flex gap-3">
           <img
             src={
               user.profilePicture ||
-              "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+              "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
             }
             className="w-10 h-10 rounded-full"
             alt=""

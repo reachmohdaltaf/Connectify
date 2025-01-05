@@ -4,9 +4,9 @@ import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { AiOutlineClose } from 'react-icons/ai';
 import { toast } from 'react-hot-toast';
-import {IoImagesOutline} from 'react-icons/io5';
+import { IoImagesOutline } from 'react-icons/io5';
 import { axiosInstance } from '@/lib/axios';
-import {CiFaceSmile} from 'react-icons/ci';
+import { CiFaceSmile } from 'react-icons/ci';
 
 const PostCreationCard = ({ authUser }) => {
     const [content, setContent] = useState("");
@@ -71,11 +71,11 @@ const PostCreationCard = ({ authUser }) => {
     };
 
     return (
-        <Card className="flex-col max-h-fit bg-white rounded-sm shadow-none p-4 gap-8 flex items-center space-x-4">
+        <Card className="flex flex-col max-h-screen  bg-white rounded-sm shadow-none p-4 gap-8 items-center">
             {/* Profile Image */}
-            <div className="flex w-[500px] items-center space-x-4">
+            <div className="flex flex-col md:flex-row w-full  items-center md:items-start space-y-4 md:space-y-0 md:space-x-4">
                 <img
-                    src={authUser.ProfilePicture || "https://via.placeholder.com/150"}
+                    src={authUser.ProfilePicture || "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"}
                     className="rounded-full w-10 h-10"
                     alt="Profile"
                 />
@@ -83,9 +83,13 @@ const PostCreationCard = ({ authUser }) => {
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     placeholder="What's on your mind?"
-                    className="flex-1 bg-gray-100 p-2 h-10 rounded-lg outline-none focus:ring-1 focus:ring-blue-600"
+                    className="flex-1 bg-gray-100 p-2 h-10 rounded-lg outline-none focus:ring-1 focus:ring-blue-600 w-full md:w-auto"
                 />
-                <Button onClick={handlePostCreation} variant="tertiary" className="px-4">
+                <Button
+                    onClick={handlePostCreation}
+                    variant="tertiary"
+                    className="px-4 w-full md:w-auto"
+                >
                     Post
                 </Button>
             </div>
@@ -108,7 +112,8 @@ const PostCreationCard = ({ authUser }) => {
                 </div>
             )}
 
-            <div className="flex items-start justify-start w-full gap-2">
+            {/* Footer Section */}
+            <div className="flex flex-row items-center justify-between w-full gap-2">
                 <label className="cursor-pointer text-2xl">
                     <IoImagesOutline title="Add Image" />
                     <input
