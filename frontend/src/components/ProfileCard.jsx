@@ -2,29 +2,44 @@ import React from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
 import { Button } from './ui/button'
 
-const ProfileCard = ({ authUser }) => {
-  const { name, username, email, location, profilePicture, connections } = authUser;
+const ProfileCard = ({ user }) => {
+
+  const { name, username, email, location, profilePicture, connections, headline  } = user;
   
   return (
-    <Card className="w-[40%] hidden lg:block h-fit bg-white rounded-lg shadow-sm p-4">
-      <CardHeader className="flex items-center">
-        <img 
-          src={profilePicture || "https://via.placeholder.com/150"} 
-          alt="Profile" 
-          className="w-20 h-20 rounded-full" 
-        />
-        <div className='flex items-center flex-col'>
-          <CardTitle className="text-xl font-semibold">{name}</CardTitle>
-          <CardDescription className="text-gray-500 text-sm">{connections.length} connections</CardDescription>
-        </div>
-      </CardHeader>
-      <CardContent className=' justify-center flex'>
-        <p className="text-gray-700 text-sm">Email: {email}</p>
-      </CardContent>
-      <CardDescription className="text-center flex-col text-gray-500 text-sm">
+    <Card className="w-[40%] hidden lg:block h-fit bg-white rounded-xl shadow-sm">
+     <CardHeader className="relative flex w-full items-center rounded-xl p-0">
+  <img 
+    src="https://via.placeholder.com/150" 
+    className="h-20 w-full rounded-tr-lg rounded-tl-lg" 
+    alt="" 
+  />
+  <img 
+    src={profilePicture || "https://via.placeholder.com/150"} 
+    alt="Profile" 
+    className="w-16 h-16 absolute top-12 left-12 transform -translate-x-1/2 border-2 border-white rounded-full" 
+  />
+  <div className="flex w-[90%] flex-col mt-16">
+    <CardTitle className="text-xl mt-10 font-semibold">{name}</CardTitle>
+    <CardDescription className="overflow-ellipsis text-gray-500 text-xs">
+      {headline}
+    </CardDescription>
+    <CardDescription className="text-gray-500 text-sm">
+      {connections.length} connections
+    </CardDescription>
+    <CardDescription className="text-gray-700 flex flex-col text-sm">
+      Email: {email}
+      <p>      username: @{username}
+      </p>
+    </CardDescription>
+  </div>
+</CardHeader>
+
+     
+      <CardDescription className="text-center p-3   flex-col text-gray-500 text-sm">
         <Button variant="outline" className='w-full'>Edit Profile</Button>
       </CardDescription>
-      <CardDescription className='w-full'>Location: {location || "New, Delhi"}</CardDescription>
+      <CardDescription className='w-full p-3'>Location: {location || "New, Delhi"}</CardDescription>
     </Card>
   )
 }

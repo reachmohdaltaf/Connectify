@@ -1,3 +1,4 @@
+import { sendConnectionAcceptedEmail } from "../emails/emailHandlers.js";
 import ConnectionRequest from "../models/connectionRequest.model.js";
 import Notification from "../models/notification.model.js";
 import User from "../models/user.model.js";
@@ -41,6 +42,9 @@ export const sendConnectionRequest = async (req, res) => {
 export const acceptConnectionRequest = async (req, res) => {
 	try {
 		const { requestId } = req.params;
+		if (!requestId) {
+			return res.status(400).json({ message: "Request ID is required" });
+		  }
 		const userId = req.user._id;
 
 		const request = await ConnectionRequest.findById(requestId)

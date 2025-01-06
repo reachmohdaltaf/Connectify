@@ -8,7 +8,7 @@ const Post = ({ post }) => {
   });
 
   return (
-    <Card className="rounded-sm w-full  h-fit p-4 shadow-none ">
+    <Card className="rounded-xl mt-1 w-full h-fit p-4 shadow-none ">
       <CardTitle className="flex items-center justify-start gap-3">
         <img
           src={

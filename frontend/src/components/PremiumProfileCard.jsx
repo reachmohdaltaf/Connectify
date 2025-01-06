@@ -2,12 +2,12 @@ import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from './ui/card';
 import { Button } from './ui/button';
 
-const PremiumProfileCard = ({authUser}) => {
+const PremiumProfileCard = ({user}) => {
   return (
-    <Card className="w-80 sticky top-20 mx-auto p-6 shadow-sm border border-gray-200">
+    <Card className="w-80 shadow-none rounded-xl sticky top-20 mx-auto    border-gray-200">
       <CardHeader>
         <CardTitle className="text-2xl font-bold text-gray-800">
-          hi, {authUser.name} Unlock Your Full Potential
+          Hi, {user.name} Unlock Your Full Potential
         </CardTitle>
       </CardHeader>
       <CardContent>

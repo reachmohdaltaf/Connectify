@@ -34,8 +34,8 @@ const HomePage = () => {
   console.log("posts", posts);
   console.log("recommendedUsers", recommendedUsers);
   return (
-    <div className="flex justify-center gap-4">
-      <ProfileCard authUser={authUser} />
+    <div className="flex justify-center gap-2">
+      <ProfileCard user={authUser} />
       <div className="w-full">
         <PostCreation authUser={authUser} />
         {posts?.map((post) => {
@@ -47,13 +47,13 @@ const HomePage = () => {
       </div>
      <div className="lg:flex hidden flex-col  sm:hidden relative gap-2">
      {recommendedUsers?.length > 0 && (
-        <Card className="w-80 shadow-none  p-4  rounded-sm h-fit flex flex-col items-center justify-center gap-2">
+        <Card className="w-80 shadow-none  p-4   h-fit flex flex-col items-center justify-center gap-2">
           {recommendedUsers?.map((user) => (
             <RecommendedUser key={user._id} user={user} />
           ))}
         </Card>
       )}
-      <PremiumProfileCard authUser={authUser}/>
+      <PremiumProfileCard user={authUser}/>
      </div>
     </div>
   );

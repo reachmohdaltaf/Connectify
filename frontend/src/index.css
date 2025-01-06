@@ -87,3 +87,15 @@
 *{
   scroll-behavior: smooth;
 }
+
+.fillblack{
+  transition: ease 0.1s;
+}
+
+.fillblack:hover {
+  fill: black; /* Tailwind red-500 */
+  
+}
+.fillblack:active{
+  fill: black;
+}

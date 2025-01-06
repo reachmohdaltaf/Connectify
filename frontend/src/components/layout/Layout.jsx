@@ -10,7 +10,7 @@ const Layout = () => {
     <div className="min-h-screen">
       {!authUser ? <NavbarLayout/> : <Navbar/> }
       {/* The Outlet renders the child route */}
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto w-[90%] py-5">
       <Outlet />
       </div>
     </div>

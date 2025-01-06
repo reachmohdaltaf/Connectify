@@ -56,16 +56,7 @@ const LoginCard = () => {
     <Card className="w-full h-full md:w-[487px] border-none shadow-none">
       <CardHeader className="flex items-center justify-center text-center p-7">
         <CardTitle className="text-2xl">Welcome Back!</CardTitle>
-        <CardDescription className="">
-          By Login , you agree to our{" "}
-          <Link href="/privacy" className="">
-            <span className="text-blue-700 underline">Privacy Policy</span>
-          </Link>{" "}
-          and{" "}
-          <Link href="/privacy" className="">
-            <span className="text-blue-700 underline">Term and condition</span>
-          </Link>
-        </CardDescription>
+       
       </CardHeader>
       <div className="px-7 mb-2">
         <Separator />
@@ -124,6 +115,16 @@ const LoginCard = () => {
           Dont&apos;t have and account? <Link to="/signup" className="text-primary"><span className="text-blue-700">Sign up</span></Link>
         </p>
        </CardContent>
+       <CardContent className="">
+          By Login , you agree to our{" "}
+          <Link href="/privacy" className="">
+            <span className="text-blue-700 underline">Privacy Policy</span>
+          </Link>{" "}
+          and{" "}
+          <Link href="/privacy" className="">
+            <span className="text-blue-700 underline">Term and condition</span>
+          </Link>
+        </CardContent>
     </Card>
   );
 };
