@@ -9,11 +9,11 @@ const NavbarLayout = () => {
   
   const isLoginPage = location.pathname === "/signup";
   return (
-    <div className="mx-auto max-w-screen-2xl p-4">
-      <nav className="  flex items-center  justify-between">
-    <div className="logo flex gap-2">
-      <img src={logo} height='10' width='40' alt="" />
-    <h3 className="text-2xl font-semibold">connectify</h3>
+    <div className="mx-auto sm:bg-white shadow-sm lg:bg-white bg-white  sticky top-0 max-w-screen-2xl p-2">
+      <nav className="  flex items-center   justify-between">
+    <div className="logo flex gap-2  ">
+      <img src={logo} className="h-8 w-8"  alt="" />
+    <h3 className="text-xl font-semibold">connectify</h3>
     </div>
    <Link to={isLoginPage ? "/login" : "/signup"}> <Button variant='secondary'>  {isLoginPage ? "login" : "signup"} </Button></Link>
     </nav>

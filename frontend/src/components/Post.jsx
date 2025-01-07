@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardTitle } from './ui/card';
 import { useQuery } from '@tanstack/react-query';
 
 const Post = ({ post }) => {
+  const [more, setMore] = useState(false)
   const { data: authUser } = useQuery({
     queryKey: ['authUser'],
   });
+
+  const seeMore = () => {
+    setMore(!more)
+  }
 
   return (
     <Card className="rounded-xl mt-1 w-full h-fit p-4 shadow-none ">
@@ -26,8 +31,8 @@ const Post = ({ post }) => {
           )}
         </div>
       </CardTitle>
-      <CardContent className="mt-4">
-        {post.content || ''}
+      <CardContent className="mt-4 ">
+        <div className='text-gray-800 text-sm leading-4 '><p className={more ? ' w-[450px]  ' : ' w-50 lg:w-[450px] truncate'}>{post.content || ''} </p><span onClick={() => seeMore()} className=' text-sm cursor-pointer text-blue-600 hover:text-blue-800'>See more</span></div>
         {post.image && (
           <div className="h-full w-full overflow-hidden rounded-lg sm:h-72">
             <img

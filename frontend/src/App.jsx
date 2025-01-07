@@ -7,6 +7,9 @@ import toast, { Toaster } from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "./lib/axios";
 import NotificationPage from "./pages/NotificationPage";
+import NetworkPage from "./pages/NetworkPage";
+import PostPage from "./pages/PostPage";
+import logo from './assets/logo.svg'
 
 function App() {
   const { data: authUser, isLoading,  } = useQuery({
@@ -24,7 +27,7 @@ function App() {
     },
   });
 
-  if(isLoading) return <div>Loading...</div>
+  if(isLoading) return <div className="h-screen flex justify-center items-center"><img className="h-20 animate-pulse " src={logo} alt="" /></div>
 
   console.log("authUser", authUser);
 
@@ -49,6 +52,14 @@ function App() {
         {
           path: "/notifications",
           element: authUser ? <NotificationPage/> : <Navigate to="/login" />,
+        },
+        {
+          path: "/network",
+          element: authUser ? <NetworkPage/> : <Navigate to="/login" />,
+        },
+        {
+          path: "/post/:postId",
+          element: authUser ? <PostPage/> : <Navigate to="/login" />,
         },
       ],
     },

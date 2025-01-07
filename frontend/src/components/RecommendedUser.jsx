@@ -33,7 +33,7 @@ const RecommendedUser = ({ user }) => {
 
   const { mutate: acceptRequest } = useMutation({
     mutationFn: (requestId) => {
-      console.log("Accepting request with ID:", requestId);  // Add this line
+      console.log("Accepting request with ID:", requestId);
       return axiosInstance.put(`/connections/accept/${requestId}`);
     },
     onSuccess: () => {
@@ -42,16 +42,17 @@ const RecommendedUser = ({ user }) => {
       refetch();
     },
     onError: (error) => {
-      console.error("Error while accepting connection request:", error);  // Log the error details
+      console.error("Error while accepting connection request:", error);
       toast.error(error.response?.data?.error || "An error occurred");
     },
   });
-  
 
   const renderButton = () => {
     if (isLoading) {
       return <Button className="h-9" variant="secondary">Loading...</Button>;
     }
+
+    console.log("Connection status:", connectionStatus);
 
     switch (connectionStatus?.status) {
       case "pending":
@@ -61,11 +62,12 @@ const RecommendedUser = ({ user }) => {
           </Button>
         );
       case "received":
-        // Pass connectionStatus._id instead of recipient
+        // Log connectionStatus object
+        console.log("Connection status (received):", connectionStatus);
+
+        // Pass connectionStatus.requestId instead of connectionStatus._id
         return (
-          <Button className="h-9" variant="primary" onClick={() => acceptRequest(connectionStatus?._id)}>
-
-
+          <Button className="h-9" variant="primary" onClick={() => acceptRequest(connectionStatus?.requestId)}>
             Accept
           </Button>
         );
@@ -83,8 +85,6 @@ const RecommendedUser = ({ user }) => {
         );
     }
   };
-
-  
 
   return (
     <Card className="w-full rounded-lg shadow-sm p-4">
@@ -107,4 +107,3 @@ const RecommendedUser = ({ user }) => {
 };
 
 export default RecommendedUser;
-
