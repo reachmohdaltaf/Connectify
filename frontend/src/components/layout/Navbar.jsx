@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import logo from "../../assets/logo.svg";
 import { DropdownMenu, DropdownMenuShortcut } from "../ui/dropdown-menu";
-import { IoSearch } from "react-icons/io5";
+import { IoClose, IoMenu, IoSearch } from "react-icons/io5";
 
 import {
   DropdownMenuContent,
@@ -16,8 +16,15 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { axiosInstance } from "@/lib/axios";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { Input } from "../ui/input";
+import { useState } from "react";
 
 const Navbar = () => {
+
+
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
+
   const { data: authUser } = useQuery({
     queryKey: ["authUser"],
   });
@@ -42,8 +49,7 @@ const Navbar = () => {
     },
   });
 
-  console.log("Notification", notifications)
-  console.log("Connection Requests", connectionRequests)
+ 
 
   return (
     <div className="mx-auto  bg-white sticky top-0  flex justify-center items-center   z-10  border p-2 px-4">
@@ -70,7 +76,7 @@ const Navbar = () => {
             className="text-[#404040]   flex flex-col items-center justify-center"
           >
             <svg
-              class="fillblack"
+              className="fillblack"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               data-supported-dps="24x24"
@@ -88,7 +94,7 @@ const Navbar = () => {
             className="text-[#404040] flex flex-col items-center justify-center"
           >
             <svg
-              class="fillblack"
+              className="fillblack"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               data-supported-dps="24x24"
@@ -106,7 +112,7 @@ const Navbar = () => {
             className="text-[#404040] flex flex-col items-center justify-center"
           >
             <svg
-              class="fillblack"
+              className="fillblack"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               data-supported-dps="24x24"
@@ -124,7 +130,7 @@ const Navbar = () => {
             className="text-[#404040]  flex flex-col items-center justify-center"
           >
             <svg
-              class="fillblack"
+              className="fillblack"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               data-supported-dps="24x24"
@@ -137,7 +143,7 @@ const Navbar = () => {
             </svg>
             <p className="text-xs hover:text-black">Notifications</p>
           </Link>
-          <DropdownMenu classNam=''>
+          <DropdownMenu className=''>
             <DropdownMenuTrigger asChild>
               <Button className="rounded-full mb-3 outline-none  h-7 p-0">
                 <Avatar className="rounded-full h-full w-full transition duration-1000 border   active:border-2">
@@ -151,15 +157,15 @@ const Navbar = () => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56 mr-2 m-5 bg-white border border-gray-200 rounded shadow-md">
-              <DropdownMenuLabel className="px-4 py-2 text-sm font-semibold text-gray-700">
+              <DropdownMenuLabel className="px-4 py-2 text-sm font-bold text-gray-700">
                 My Account
               </DropdownMenuLabel>
               <DropdownMenuSeparator className="my-1 border-t border-gray-200" />
               <DropdownMenuGroup>
-                <DropdownMenuItem className="flex items-center outline-none justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                  Profile
+              <Link to={`/profile/${authUser.username}`}><DropdownMenuItem className="flex items-center outline-none justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                 Profile
                   <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-                </DropdownMenuItem>
+                </DropdownMenuItem></Link>
                 <DropdownMenuItem className="flex items-center outline-none justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                   connections
                   <DropdownMenuShortcut></DropdownMenuShortcut>
@@ -181,7 +187,48 @@ const Navbar = () => {
           </DropdownMenu>
         </div>
         
+  
       </nav>
+      <div>
+      {/* Sidebar Toggle Button */}
+      <button
+        className="text-gray-600 hover:text-black focus:outline-none lg:hidden"
+        onClick={toggleSidebar}
+      >
+        {isSidebarOpen ? <IoClose size={24} /> : <IoMenu size={24} />}
+      </button>
+
+      {/* Black Overlay */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          onClick={toggleSidebar}
+        ></div>
+      )}
+
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 left-0 h-full bg-white shadow-lg transition-transform transform ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } w-64 z-50`}
+      >
+        <div className="p-4">
+          <button
+            className="text-gray-600 hover:text-black focus:outline-none"
+            onClick={toggleSidebar}
+          >
+            <IoClose size={24} />
+          </button>
+          {/* Add your sidebar content here */}
+          <ul className="mt-4 space-y-4 text-gray-700">
+            <li>Home</li>
+            <li>Connections</li>
+            <li>Jobs</li>
+            <li>Notifications</li>
+          </ul>
+        </div>
+      </div>
+    </div>
     </div>
   );
 };

@@ -33,7 +33,7 @@ const RecommendedUser = ({ user }) => {
 
   const { mutate: acceptRequest } = useMutation({
     mutationFn: (requestId) => {
-      console.log("Accepting request with ID:", requestId);
+    // console.log("Accepting request with ID:", requestId);
       return axiosInstance.put(`/connections/accept/${requestId}`);
     },
     onSuccess: () => {
@@ -52,7 +52,6 @@ const RecommendedUser = ({ user }) => {
       return <Button className="h-9" variant="secondary">Loading...</Button>;
     }
 
-    console.log("Connection status:", connectionStatus);
 
     switch (connectionStatus?.status) {
       case "pending":

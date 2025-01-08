@@ -65,7 +65,6 @@ export const updateProfile = async (req, res) => {
 
     const user = await User.findByIdAndUpdate(req.user._id, updatedUser, {new: true}).select("-password")
     res.status(201).json({message: "Profile updated successfully", user});
-    
 
   } catch (error) {
     console.log("Error in updateProfile: ", error.message);

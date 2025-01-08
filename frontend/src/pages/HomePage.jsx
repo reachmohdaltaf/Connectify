@@ -31,8 +31,7 @@ const HomePage = () => {
     },
   });
 
-  console.log("posts", posts);
-  console.log("recommendedUsers", recommendedUsers);
+ 
   return (
     <div className="flex justify-center gap-2">
       <ProfileCard user={authUser} />

@@ -10,6 +10,7 @@ import NotificationPage from "./pages/NotificationPage";
 import NetworkPage from "./pages/NetworkPage";
 import PostPage from "./pages/PostPage";
 import logo from './assets/logo.svg'
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   const { data: authUser, isLoading,  } = useQuery({
@@ -29,7 +30,6 @@ function App() {
 
   if(isLoading) return <div className="h-screen flex justify-center items-center"><img className="h-20 animate-pulse " src={logo} alt="" /></div>
 
-  console.log("authUser", authUser);
 
   // Dynamically define the router based on authUser
   const router = createBrowserRouter([
@@ -60,6 +60,10 @@ function App() {
         {
           path: "/post/:postId",
           element: authUser ? <PostPage/> : <Navigate to="/login" />,
+        },
+        {
+          path: "/profile/:username",
+          element: authUser ? <ProfilePage/> : <Navigate to="/login" />,
         },
       ],
     },

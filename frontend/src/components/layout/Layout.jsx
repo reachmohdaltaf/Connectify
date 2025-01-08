@@ -5,7 +5,6 @@ import NavbarLayout from "./NavbarLayout";
 
 const Layout = () => {
   const {data: authUser} = useQuery({queryKey: ["authUser"]})
-  console.log("auth user in layout", authUser)
   return (
     <div className="min-h-screen">
       {!authUser ? <NavbarLayout/> : <Navbar/> }

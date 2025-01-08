@@ -15,7 +15,6 @@ const NetworkPage = () => {
         queryFn: async () =>  axiosInstance.get("/connections/requests")
         
     })
-    console.log("connection request in networkpage",connectionRequests)
 
   return (
     <div className='flex gap-5 justify-between'>

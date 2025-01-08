@@ -69,8 +69,7 @@ const NotificationPage = () => {
                     <span>
                         <Link to={`/profile/${notification.relatedUser.username}`} className="font-bold">
                             {notification.relatedUser.name}
-{console.log(notification.relatedUser)
-}                        </Link> commented on your post.
+                      </Link> commented on your post.
                     </span>
                 );
             case "connectionAccepted":
