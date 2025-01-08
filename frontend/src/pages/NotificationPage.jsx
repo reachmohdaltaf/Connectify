@@ -59,6 +59,7 @@ const NotificationPage = () => {
         }
     };
 
+
     // Helper function to render notification content
     const renderNotificationContent = (notification) => {
         switch (notification.type) {
