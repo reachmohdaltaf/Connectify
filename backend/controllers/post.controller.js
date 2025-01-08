@@ -1,7 +1,7 @@
 import Post from "../models/post.model.js";
 import Notification from "../models/notification.model.js";
 import { sendCommentNotificationEmail } from "../emails/emailHandlers.js";
-import cloudinary from "../lib/Cloudinary.js";
+import cloudinary from "../lib/cloudinary.js";
 
 export const getFeedPosts = async (req, res) => {
 	try {
