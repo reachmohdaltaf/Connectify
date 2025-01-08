@@ -1,5 +1,4 @@
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
-import Layout from "./components/layout/layout";
 import HomePage from "./pages/HomePage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
@@ -11,6 +10,7 @@ import NetworkPage from "./pages/NetworkPage";
 import PostPage from "./pages/PostPage";
 import logo from './assets/logo.svg'
 import ProfilePage from "./pages/ProfilePage";
+import Layout from "./components/layout/Layout.jsx";
 
 function App() {
   const { data: authUser, isLoading,  } = useQuery({
