@@ -11,7 +11,7 @@ const Layout = () => {
       {/* The Outlet renders the child route */}
       <div className="container mx-auto w-[98%] lg:w-[90%] py-0 lg:py-5">
       <Outlet />
-      <footer className="fixed  bottom-0 flex justify-around gap-1 md:hidden  w-full bg-gray-200 text-center py-1">
+    {authUser &&  <footer className="fixed  bottom-0 flex justify-around gap-1 md:hidden  w-full bg-gray-200 text-center py-1">
       <Link
             to="/"
             className="text-[#404040]   flex flex-col items-center justify-center"
@@ -84,7 +84,8 @@ const Layout = () => {
             </svg>
             <p className="text-xs hover:text-black">Notifications</p>
           </Link>
-      </footer>
+      </footer> }
+     
       </div>
     </div>
   );
