@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 const ProfileCard = ({ user }) => {
 
   const { name, username, email, bannerImg ,  location, profilePicture, connections, headline  } = user;
-  
   return (
     <Card className="w-[40%] hidden lg:block h-fit bg-white rounded-xl shadow-sm">
      <CardHeader className="relative flex w-full items-center rounded-xl p-0">
