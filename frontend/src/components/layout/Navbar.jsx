@@ -210,26 +210,53 @@ const Navbar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full bg-white shadow-lg transition-transform transform ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } w-64 z-50`}
-      >
-        <div className="p-4">
-          <button
-            className="text-gray-600 hover:text-black focus:outline-none"
-            onClick={toggleSidebar}
-          >
-            <IoClose size={24} />
-          </button>
-          {/* Add your sidebar content here */}
-          <ul className="mt-4 space-y-4 text-gray-700">
-            <li>Home</li>
-            <li>Connections</li>
-            <li>Jobs</li>
-            <li>Notifications</li>
-          </ul>
-        </div>
-      </div>
+  className={`fixed top-0 left-0 h-full bg-white shadow-lg transition-transform transform ${
+    isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+  } w-64 z-50`}
+>
+  <div className="p-4">
+    <button
+      className="text-gray-600 hover:text-black focus:outline-none"
+      onClick={toggleSidebar}
+    >
+      <IoClose size={24} />
+    </button>
+    <ul className="mt-8 space-y-6 text-gray-700">
+  <Link to="/" onClick={toggleSidebar}>
+    <li className="flex items-center space-x-4 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+      <span className="text-lg font-semibold">🏠</span>
+      <span>Home</span>
+    </li>
+  </Link>
+  <Link to="/network" onClick={toggleSidebar}>
+    <li className="flex items-center space-x-4 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+      <span className="text-lg font-semibold">🌐</span>
+      <span>Connections</span>
+    </li>
+  </Link>
+  <Link to="/" onClick={toggleSidebar}>
+    <li className="flex items-center space-x-4 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+      <span className="text-lg font-semibold">💼</span>
+      <span>Jobs</span>
+    </li>
+  </Link>
+  <Link to="/notifications" onClick={toggleSidebar}>
+    <li className="flex items-center space-x-4 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+      <span className="text-lg font-semibold">🔔</span>
+      <span>Notifications</span>
+    </li>
+  </Link>
+  <Link   onClick={() => logout()}>
+    <li className="flex items-center space-x-4 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+      <span className="text-lg font-semibold">🚪</span>
+      <span>Logout</span>
+    </li>
+  </Link>
+</ul>
+
+  </div>
+</div>
+
     </div>
     </div>
   );
