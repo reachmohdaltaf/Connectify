@@ -182,7 +182,7 @@ const NotificationPage = () => {
                     <p>No notifications at the moment.</p>
                 )}
             </Card>
-            <div>
+            <div className='hidden md:block '>
                 <PremiumProfileCard className="" user={authUser} />
             </div>
         </div>

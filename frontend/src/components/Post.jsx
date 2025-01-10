@@ -105,28 +105,30 @@ const Post = ({ post }) => {
           )}
         </div>
       </CardTitle>
-      <CardContent className="mt-4 ">
-        <div className="text-gray-800 text-sm leading-4 ">
-          <p className={more ? 'w-[450px]' : 'w-50 lg:w-[450px] truncate'}>
-            {post.content || ''}{' '}
-          </p>
-          <span
-            onClick={() => seeMore()}
-            className="text-sm cursor-pointer text-blue-600 hover:text-blue-800"
-          >
-            See more
-          </span>
-        </div>
-        {post.image && (
-          <div className="h-full w-full overflow-hidden rounded-lg sm:h-72">
-            <img
-              src={post.image}
-              alt="Post content"
-              className="w-full h-full mt-4 object-cover"
-            />
-          </div>
-        )}
-      </CardContent>
+      <CardContent className="mt-4 p-0">
+  <div className="text-gray-800 text-sm ">
+    <p className={more ? 'w-full' : 'w-50 h-fit lg:w-[450px] truncate'}>
+      {post.content || ''}
+    </p>
+    {/* "See more" link visible only on larger screens */}
+    <span
+      onClick={() => seeMore()}
+      className="text-sm cursor-pointer text-blue-600 hover:text-blue-800 hidden sm:inline-block"
+    >
+      {more ? 'See less' : 'See more'}
+    </span>
+  </div>
+  {post.image && (
+    <div className="h-full w-full overflow-hidden rounded-lg sm:h-80">
+      <img
+        src={post.image}
+        alt="Post content"
+        className="w-full h-full mt-4 object-cover"
+      />
+    </div>
+  )}
+</CardContent>
+
       <div className="flex gap-4 mt-2">
         {/* Like button */}
         <button
