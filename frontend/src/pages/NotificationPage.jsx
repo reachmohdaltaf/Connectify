@@ -29,6 +29,7 @@ const NotificationPage = () => {
             }
         },
     });
+    console.log(notifications)
 
     // Mark notification as read
     const { mutate: markAsReadMutation } = useMutation({
@@ -60,6 +61,7 @@ const NotificationPage = () => {
     };
 
 
+
     // Helper function to render notification content
     const renderNotificationContent = (notification) => {
         switch (notification.type) {
@@ -70,10 +72,11 @@ const NotificationPage = () => {
                     <span>
                         <Link to={`/profile/${notification.relatedUser.username}`} className="font-bold">
                             {notification.relatedUser.name}
-                      </Link> commented on your post.
+                        </Link> commented on your post.
                     </span>
                 );
             case "connectionAccepted":
+                // Adjust the display name logic here
                 return (
                     <span>
                         <Link to={`/profile/${notification.relatedUser.username}`} className="font-bold">
@@ -85,6 +88,8 @@ const NotificationPage = () => {
                 return null;
         }
     };
+
+    
 
     // Helper function to render related post
     const renderRelatedPost = (relatedPost) => {

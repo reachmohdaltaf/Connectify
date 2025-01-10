@@ -3,7 +3,7 @@ import React from 'react'
 
 const SignUpPage = () => {
   return (
-    <div className='min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
+    <div className='min-h-screen flex flex-col items-center py-1 lg:py-12 px-1 sm:px-6 lg:px-8'>
     
     <SignUpCard/>
 

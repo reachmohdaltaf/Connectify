@@ -8,10 +8,14 @@ import toast from "react-hot-toast";
 const RecommendedUser = ({ user }) => {
   const queryClient = useQueryClient();
   
+  
   const { data: connectionStatus, isLoading, refetch } = useQuery({
     queryKey: ["connectionStatus", user._id],
     queryFn: () => axiosInstance.get(`/connections/status/${user._id}`).then((res) => res.data),
-  });
+    initialData: [] // Fallback to empty array if the query fails or is empty
+
+  }); 
+  
 
   const { mutate: sendConnectionRequest } = useMutation({
     mutationFn: (userId) => axiosInstance.post(`/connections/request/${userId}`),
@@ -27,7 +31,7 @@ const RecommendedUser = ({ user }) => {
       refetch();
     },
     onError: (error) => {
-      toast.error(error.response?.data?.message || "Something went wrong!");
+      console.log("error in sending connection request")
     },
   });
 
@@ -43,7 +47,7 @@ const RecommendedUser = ({ user }) => {
     },
     onError: (error) => {
       console.error("Error while accepting connection request:", error);
-      toast.error(error.response?.data?.error || "An error occurred");
+    
     },
   });
 

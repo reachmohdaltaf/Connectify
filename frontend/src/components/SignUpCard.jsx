@@ -74,28 +74,28 @@ const SignUpCard = () => {
       <CardContent className="p-4">
         <form className="space-y-4" onSubmit={handleSignup}>
         <Input
-        placeholder="Name"
+        placeholder="Enter Your Name"
         className="w-full mb-4"
         value={name}
         onChange={(e)=> setName(e.target.value)}
         type="text"
         />
          <Input
-        placeholder="username"
+        placeholder="Enter Username"
         className="w-full mb-4"
         value={username}
         onChange={(e)=> setUsername(e.target.value)}
         type="text"
         />
         <Input
-        placeholder="Email"
+        placeholder="Enter Your Email"
         className="w-full mb-4"
         value={email}
         onChange={(e)=> setEmail(e.target.value)}
         type="email"
         />
          <Input
-        placeholder="Password"
+        placeholder="Enter Your Password"
         className="w-full mb-4"
         value={password}
         onChange={(e)=> setPassword(e.target.value)}

@@ -1,5 +1,6 @@
+import React, { useState, useRef } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import React, { useState, useRef } from 'react'; // Make sure useRef is imported
+import EmojiPicker from 'emoji-picker-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -9,14 +10,15 @@ import { axiosInstance } from '@/lib/axios';
 import { CiFaceSmile } from 'react-icons/ci';
 import { MdOutlineArticle } from "react-icons/md";
 
-
 const PostCreationCard = ({ authUser }) => {
     const [content, setContent] = useState("");
     const [image, setImage] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
+    const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+    const [isDragging, setIsDragging] = useState(false); // track drag state
+    const [showDropArea, setShowDropArea] = useState(false); // control visibility of drop area
 
-    const fileInputRef = useRef(null); // Define fileInputRef here
-
+    const fileInputRef = useRef(null);
     const queryClient = useQueryClient();
 
     const { mutate: createPostMutation, isPending } = useMutation({
@@ -37,6 +39,11 @@ const PostCreationCard = ({ authUser }) => {
     });
 
     const handlePostCreation = async () => {
+        if (!content.trim() && !image) {
+            toast.error("Please add some content or an image before posting!");
+            return;
+        }
+
         try {
             const postData = { content };
             if (image) postData.image = await readFileAsDataURL(image);
@@ -63,6 +70,29 @@ const PostCreationCard = ({ authUser }) => {
         }
     };
 
+    const handleDrop = (e) => {
+        e.preventDefault();
+        setIsDragging(false);
+        setShowDropArea(false); // hide drop area after drop
+
+        const file = e.dataTransfer.files[0];
+        if (file) {
+            setImage(file);
+            readFileAsDataURL(file).then(setImagePreview);
+        }
+    };
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        setIsDragging(true);
+        setShowDropArea(true); // show drop area while dragging
+    };
+
+    const handleDragLeave = () => {
+        setIsDragging(false);
+        setShowDropArea(false); // hide drop area when dragging leaves
+    };
+
     const readFileAsDataURL = (file) => {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
@@ -72,17 +102,21 @@ const PostCreationCard = ({ authUser }) => {
         });
     };
 
+    const handleEmojiSelect = (emojiObject) => {
+        setContent((prevContent) => prevContent + emojiObject.emoji);
+        setShowEmojiPicker(false); // Hide the picker after selecting an emoji
+    };
+
     return (
-        <Card className="flex flex-col  max-h-screen mb-1  bg-white  shadow-sm p-4 gap-5 items-center">
-            {/* Profile Image */}
-            <div className="flex flex-col md:flex-row w-full  items-center md:items-start space-y-4 md:space-y-0 md:space-x-4">
+        <Card className="flex flex-col max-h-screen mb-1 bg-white shadow-sm p-4 gap-5 items-center">
+            <div className="flex flex-col md:flex-row w-full items-center md:items-start space-y-4 md:space-y-0 md:space-x-4">
                 <img
-                    src={authUser.ProfilePicture || "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"}
+                    src={authUser.profilePicture || "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"}
                     className="rounded-full w-10 h-10"
                     alt="Profile"
                 />
                 <textarea
-                    required
+                    required={true}
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     placeholder="What's on your mind?"
@@ -97,7 +131,6 @@ const PostCreationCard = ({ authUser }) => {
                 </Button>
             </div>
 
-            {/* Image Preview */}
             {imagePreview && (
                 <div className="w-full flex items-center justify-start relative mt-4">
                     <img
@@ -115,24 +148,46 @@ const PostCreationCard = ({ authUser }) => {
                 </div>
             )}
 
-            {/* Footer Section */}
-            <div className="flex flex-row items-center justify-between w-full gap-2">
-               <div className='flex gap-2'>
-               <label className="cursor-pointer text-xl">
-                    <IoImagesOutline title="Add Image" />
-                    <input
-                        ref={fileInputRef} // Now using fileInputRef
-                        type="file"
-                        accept="image/*"
-                        className="hidden"
-                        onChange={handleImageChange}
+            {/* Conditionally show the drop area when dragging */}
+            {showDropArea && (
+                <div
+                    className="w-full h-32 border-dashed border-2 border-blue-600 bg-blue-100 flex items-center justify-center text-gray-500 mt-4"
+                    onDrop={handleDrop}
+                    onDragOver={handleDragOver}
+                    onDragLeave={handleDragLeave}
+                >
+                    Drop Image Here
+                </div>
+            )}
+
+            <div className="flex flex-row items-center justify-between w-full gap-2 mt-4">
+                <div className="flex gap-2">
+                    <label className="cursor-pointer text-xl">
+                        <IoImagesOutline title="Add Image" />
+                        <input
+                            ref={fileInputRef}
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            onChange={handleImageChange}
+                        />
+                    </label>
+                    <label className="cursor-pointer text-xl">
+                        <MdOutlineArticle />
+                    </label>
+                </div>
+                <div className="relative">
+                    <CiFaceSmile
+                        className="text-xl cursor-pointer"
+                        title="Add Emoji"
+                        onClick={() => setShowEmojiPicker((prev) => !prev)}
                     />
-                </label>
-                <label className="cursor-pointer text-xl">
-                <MdOutlineArticle />
-                </label>
-               </div>
-                <CiFaceSmile className="text-xl cursor-pointer" title="Add Emoji" />
+                    {showEmojiPicker && (
+                        <div className="absolute top-8 right-0 z-10">
+                            <EmojiPicker onEmojiClick={handleEmojiSelect} />
+                        </div>
+                    )}
+                </div>
             </div>
         </Card>
     );

@@ -53,7 +53,7 @@ const LoginCard = () => {
 
 
   return (
-    <Card className="w-full h-full md:w-[487px] border-none shadow-none">
+    <Card className="w-full h-full md:w-[487px]  border-none shadow-none">
       <CardHeader className="flex items-center justify-center text-center p-7">
         <CardTitle className="text-2xl">Welcome Back!</CardTitle>
        
@@ -66,7 +66,7 @@ const LoginCard = () => {
         <form className="space-y-4" onSubmit={handleLogin}>
       
          <Input
-        placeholder="username"
+        placeholder="username eg:abcd-123"
         className="w-full mb-4"
         value={username}
         onChange={(e)=> setUsername(e.target.value)}

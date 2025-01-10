@@ -30,6 +30,7 @@ export const sendConnectionRequest = async (req, res) => {
 			sender: senderId,
 			recipient: userId,
 		});
+		console.log("newrequest",newRequest);	
 
 		await newRequest.save();
 
@@ -78,6 +79,7 @@ export const acceptConnectionRequest = async (req, res) => {
 		});
 
 		await notification.save();
+
 
 		res.json({ message: "Connection accepted successfully" });
 

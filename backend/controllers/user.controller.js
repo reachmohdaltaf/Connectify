@@ -56,11 +56,11 @@ export const updateProfile = async (req, res) => {
     
     if(req.body.profilePicture) {
       const result = await cloudinary.uploader.upload(req.body.profilePicture)
-      updatedData.profilePicture = result.secure_url
+      updatedUser.profilePicture = result.secure_url
     }
     if(req.body.bannerImg) {
       const result = await cloudinary.uploader.upload(req.body.bannerImg)
-      updatedData.bannerImg = result.secure_url
+      updatedUser.bannerImg = result.secure_url
     }
 
     const user = await User.findByIdAndUpdate(req.user._id, updatedUser, {new: true}).select("-password")

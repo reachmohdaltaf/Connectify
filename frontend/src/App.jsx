@@ -20,10 +20,10 @@ function App() {
         const res = await axiosInstance.get("/auth/me");
         return res.data;
       } catch (error) {
-        if (error.response && error.response.status === 401) {
-          return null;
+        if(error.response.status === 401) {
+          return null
         }
-        toast.error("Error fetching user data");
+        
       }
     },
   });

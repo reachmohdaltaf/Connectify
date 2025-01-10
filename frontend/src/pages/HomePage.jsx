@@ -18,7 +18,7 @@ const HomePage = () => {
         const res = await axiosInstance.get("/users/suggestions");
         return res.data;
       } catch (error) {
-        toast.error(error.message || "something went wrong");
+        console.log("Error fetching recommended users: ")
       }
     },
   });

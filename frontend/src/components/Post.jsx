@@ -1,16 +1,90 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardTitle } from './ui/card';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { FaThumbsUp, FaComment } from 'react-icons/fa';  // Importing the icons
 
 const Post = ({ post }) => {
-  const [more, setMore] = useState(false)
+  const [more, setMore] = useState(false);
   const { data: authUser } = useQuery({
     queryKey: ['authUser'],
   });
+  const [showComments, setShowComments] = useState(false);
+  const [newComment, setNewComment] = useState("");
+  const [comments, setComments] = useState(post.comments || []);
+  const isOwner = authUser._id === post.author._id;
+  const isLiked = post.likes.includes(authUser._id);
+
+  const queryClient = useQueryClient();
+
+  const { mutate: deletePost, isPending: isDeletingPost } = useMutation({
+    mutationFn: async () => {
+      await axiosInstance.delete(`/posts/delete/${post._id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      toast.success("Post deleted successfully");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const { mutate: createComment, isPending: isAddingComment } = useMutation({
+    mutationFn: async (newComment) => {
+      await axiosInstance.post(`/posts/${post._id}/comment`, { content: newComment });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      toast.success("Comment added successfully");
+    },
+    onError: (err) => {
+      toast.error(err.response.data.message || "Failed to add comment");
+    },
+  });
+
+  const { mutate: likePost, isPending: isLikingPost } = useMutation({
+    mutationFn: async () => {
+      await axiosInstance.post(`/posts/${post._id}/like`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      queryClient.invalidateQueries({ queryKey: ["post", postId] });
+    },
+  });
+
+  const handleDeletePost = () => {
+    if (!window.confirm("Are you sure you want to delete this post?")) return;
+    deletePost();
+  };
+
+  const handleLikePost = async () => {
+    if (isLikingPost) return;
+    likePost();
+  };
+
+  const handleAddComment = async (e) => {
+    e.preventDefault();
+    if (newComment.trim()) {
+      createComment(newComment);
+      setNewComment("");
+      setComments([
+        ...comments,
+        {
+          content: newComment,
+          user: {
+            _id: authUser._id,
+            name: authUser.name,
+            profilePicture: authUser.profilePicture,
+          },
+          createdAt: new Date(),
+        },
+      ]);
+    }
+  };
 
   const seeMore = () => {
-    setMore(!more)
-  }
+    setMore(!more);
+  };
 
   return (
     <Card className="rounded-xl mt-1 w-full h-fit p-4 shadow-none ">
@@ -32,7 +106,17 @@ const Post = ({ post }) => {
         </div>
       </CardTitle>
       <CardContent className="mt-4 ">
-        <div className='text-gray-800 text-sm leading-4 '><p className={more ? ' w-[450px]  ' : ' w-50 lg:w-[450px] truncate'}>{post.content || ''} </p><span onClick={() => seeMore()} className=' text-sm cursor-pointer text-blue-600 hover:text-blue-800'>See more</span></div>
+        <div className="text-gray-800 text-sm leading-4 ">
+          <p className={more ? 'w-[450px]' : 'w-50 lg:w-[450px] truncate'}>
+            {post.content || ''}{' '}
+          </p>
+          <span
+            onClick={() => seeMore()}
+            className="text-sm cursor-pointer text-blue-600 hover:text-blue-800"
+          >
+            See more
+          </span>
+        </div>
         {post.image && (
           <div className="h-full w-full overflow-hidden rounded-lg sm:h-72">
             <img
@@ -43,6 +127,59 @@ const Post = ({ post }) => {
           </div>
         )}
       </CardContent>
+      <div className="flex gap-4 mt-2">
+        {/* Like button */}
+        <button
+          onClick={handleLikePost}
+          className={`flex items-center gap-1 text-sm ${isLiked ? 'text-blue-600' : 'text-gray-600'}`}
+        >
+          <FaThumbsUp />
+          <span>{isLiked ? 'Liked' : 'Like'}</span>
+        </button>
+        {/* Comment button */}
+        <button
+          onClick={() => setShowComments(!showComments)}
+          className="flex items-center gap-1 text-sm text-gray-600"
+        >
+          <FaComment />
+          <span>Comment</span>
+        </button>
+      </div>
+      {showComments && (
+        <div className="mt-4">
+          <form onSubmit={handleAddComment} className="flex gap-2">
+            <input
+              type="text"
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Add a comment..."
+              className="border p-2 w-full rounded-md"
+            />
+            <button
+              type="submit"
+              disabled={isAddingComment}
+              className="bg-blue-600 text-white p-2 rounded-md"
+            >
+              Add
+            </button>
+          </form>
+          <div className="mt-4">
+            {comments.map((comment, index) => (
+              <div key={index} className="flex gap-2 mb-2">
+                <img
+                  src={comment.user.profilePicture || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'}
+                  className="w-8 h-8 rounded-full"
+                  alt={`${comment.user.name}'s profile`}
+                />
+                <div>
+                  <p className="font-semibold">{comment.user.name}</p>
+                  <p className="text-sm text-gray-600">{comment.content}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </Card>
   );
 };

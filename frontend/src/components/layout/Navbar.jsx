@@ -17,6 +17,7 @@ import { axiosInstance } from "@/lib/axios";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { Input } from "../ui/input";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
 
@@ -46,6 +47,7 @@ const Navbar = () => {
     mutationFn: async () => axiosInstance.post("/auth/logout"),
     onSuccess: () => {
       queryClient.invalidateQueries(["authUser"]);
+      toast.success("Logout successful");
     },
   });
 
@@ -145,11 +147,11 @@ const Navbar = () => {
           </Link>
           <DropdownMenu className=''>
             <DropdownMenuTrigger asChild>
-              <Button className="rounded-full mb-3 outline-none  h-7 p-0">
+              <Button variant="outline" className="rounded-full mb-3 outline-none  h-7 w-7 p-0">
                 <Avatar className="rounded-full h-full w-full transition duration-1000 border   active:border-2">
                   <AvatarImage
                     className="rounded-full h-full w-full"
-                    src="https://i.pravatar.cc/300"
+                    src={authUser.profilePicture}
                   />
                   <p className="text-black font-thin text-xs">Me</p>
                   <AvatarFallback>me</AvatarFallback>
