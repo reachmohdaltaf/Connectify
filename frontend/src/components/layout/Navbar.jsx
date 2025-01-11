@@ -228,6 +228,12 @@ const Navbar = () => {
       <span>Home</span>
     </li>
   </Link>
+  <Link  onClick={toggleSidebar} to={`/profile/${authUser.username}`}>
+    <li className="flex items-center space-x-4 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+      <span className="text-lg font-semibold">👤</span>
+      <span>Profile</span>
+    </li>
+  </Link>
   <Link to="/network" onClick={toggleSidebar}>
     <li className="flex items-center space-x-4 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors">
       <span className="text-lg font-semibold">🌐</span>

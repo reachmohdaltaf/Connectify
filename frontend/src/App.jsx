@@ -11,6 +11,7 @@ import PostPage from "./pages/PostPage";
 import logo from './assets/logo.svg'
 import ProfilePage from "./pages/ProfilePage";
 import Layout from "./components/layout/Layout.jsx";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   const { data: authUser, isLoading,  } = useQuery({
@@ -38,7 +39,7 @@ function App() {
       children: [
         {
           path: "/",
-          element: authUser ? <HomePage /> : <Navigate to="/login" />,
+          element: authUser ? <HomePage /> : <Navigate to="/landingpage" />,
         },
         {
           path: "/signup",
@@ -50,19 +51,23 @@ function App() {
         },
         {
           path: "/notifications",
-          element: authUser ? <NotificationPage/> : <Navigate to="/login" />,
+          element: authUser ? <NotificationPage/> : <Navigate to="/landingpage" />,
         },
         {
           path: "/network",
-          element: authUser ? <NetworkPage/> : <Navigate to="/login" />,
+          element: authUser ? <NetworkPage/> : <Navigate to="/landingpage" />,
         },
         {
           path: "/post/:postId",
-          element: authUser ? <PostPage/> : <Navigate to="/login" />,
+          element: authUser ? <PostPage/> : <Navigate to="/landingpage" />,
         },
         {
           path: "/profile/:username",
-          element: authUser ? <ProfilePage/> : <Navigate to="/login" />,
+          element: authUser ? <ProfilePage/> : <Navigate to="/landingpage" />,
+        },
+        {
+          path: "/landingpage",
+          element: !authUser ? <LandingPage/> : <Navigate to="/" />,
         },
       ],
     },
