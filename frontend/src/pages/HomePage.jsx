@@ -56,7 +56,7 @@ const HomePage = () => {
             >
               <h3
                 className={`text-sm font-semibold transition-all duration-500 ${
-                  isTextVisible ? "opacity-100" : ""
+                  isTextVisible ? "opacity-100" : "hidden"
                 }`}
               >
                {isTextVisible?" Share Your Cherished Moments with Friends" : ""}

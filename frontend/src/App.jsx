@@ -55,7 +55,7 @@ function App() {
         },
         {
           path: "/network",
-          element: authUser ? <NetworkPage/> : <Navigate to="/landingpage" />,
+          element: authUser ? <NetworkPage/> : <Navigate to="/login" />,
         },
         {
           path: "/post/:postId",
