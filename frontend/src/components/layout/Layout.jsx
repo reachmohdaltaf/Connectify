@@ -48,6 +48,7 @@ const Layout = () => {
             </svg>
             <p className="text-xs hover:text-black">Connections</p>
           </Link>
+          
           <Link
             to="/"
             className="text-[#404040] flex flex-col items-center justify-center"

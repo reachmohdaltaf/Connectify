@@ -191,7 +191,8 @@ const Navbar = () => {
         
   
       </nav>
-      <div>
+      <div className="flex gap-2">
+        
       {/* Sidebar Toggle Button */}
       <button
         className="text-gray-600 hover:text-black focus:outline-none lg:hidden"
