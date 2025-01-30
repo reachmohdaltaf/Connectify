@@ -8,6 +8,8 @@ import React from 'react'
 import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
 import { formatDistanceToNow } from "date-fns"
+import { ExternalLink } from 'lucide-react';
+
 
 const NotificationPage = () => {
     // Fetch authenticated user
@@ -141,14 +143,14 @@ const NotificationPage = () => {
                                             />
                                         </Link>
 
-                                        <div>
+                                        <div className='w-96'>
                                             <div className="flex items-center gap-2">
                                                 <div className="p-1 bg-gray-100 rounded-full">
                                                     {renderNotificationIcon(notification.type)}
                                                 </div>
                                                 <p className="text-sm">{renderNotificationContent(notification)}</p>
                                             </div>
-                                            <p className="text-xs text-gray-500 mt-1">
+                                            <p className="text-xs  text-gray-500 mt-1">
                                                 {formatDistanceToNow(new Date(notification.createdAt), { addSuffix: true })}
                                             </p>
                                             {renderRelatedPost(notification.relatedPost)}
