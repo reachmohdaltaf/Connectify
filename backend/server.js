@@ -21,9 +21,9 @@ if (process.env.NODE_ENV !== "production") {
 		})
 	);
 }
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(cookieParser())
+app.use(express.json())//parse json data from the body
+app.use(express.urlencoded({ extended: true }))//form data is submitted
+app.use(cookieParser())//parses cookies
 app.use('/api/v1/auth', authRoutes)
 app.use('/api/v1/users', userRoutes)
 app.use('/api/v1/posts', postRoutes)

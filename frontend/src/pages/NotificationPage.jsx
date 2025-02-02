@@ -124,7 +124,7 @@ const NotificationPage = () => {
 
                 {isLoading ? (
                     <p>Loading notifications...</p> // todo: could replace this with a spinner for better UX
-                ) : notifications && notifications.length > 0 ? (
+                ) : notifications && notifications?.length > 0 ? (
                     <ul>
                         {notifications.map((notification) => (
                             <li
