@@ -5,7 +5,7 @@ const userSchema = mongoose.Schema({
     email:{type: String, required:true, unique:true},
     password:{type: String, required:true},
     profilePicture:{type: String, default:"https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"},
-    bannerImg:{type: String, default:"https://placehold.it/1500x400"},
+    bannerImg:{type: String, default:"https://cdn.pixabay.com/photo/2015/10/29/14/38/web-1012467_1280.jpg"},
     headline:{type: String, default: ""},
     location:{type: String, default: "Earth"},
     about:{type: String, default: ""},
