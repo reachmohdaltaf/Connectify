@@ -9,12 +9,12 @@ export function createWelcomeEmailTemplate(name, profileUrl) {
   </head>
   <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
     <div style="background: linear-gradient(to right, #0077B5, #00A0DC); padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
-      <img src="https://img.freepik.com/premium-vector/linkedin-logo_578229-227.jpg" alt="UnLinked Logo" style="width: 150px; margin-bottom: 20px;border-radius: 10px;">
-      <h1 style="color: white; margin: 0; font-size: 28px;">Welcome to UnLinked!</h1>
+      <img src="https://connectify-h8zy.onrender.com/assets/logo-B9T138Ag.svg" alt="UnLinked Logo" style="width: 150px; margin-bottom: 20px;border-radius: 10px;">
+      <h1 style="color: white; margin: 0; font-size: 28px;">Welcome to Connectify!</h1>
     </div>
     <div style="background-color: #ffffff; padding: 30px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
       <p style="font-size: 18px; color: #0077B5;"><strong>Hello ${name},</strong></p>
-      <p>We're thrilled to have you join our professional community! UnLinked is your platform to connect, learn, and grow in your career.</p>
+      <p>We're thrilled to have you join our professional community! Connectify is your platform to connect, learn, and grow in your career.</p>
       <div style="background-color: #f3f6f8; padding: 20px; border-radius: 8px; margin: 20px 0;">
         <p style="font-size: 16px; margin: 0;"><strong>Here's how to get started:</strong></p>
         <ul style="padding-left: 20px;">
